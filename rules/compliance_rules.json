@@ -1,0 +1,50 @@
+[
+  {
+    "id": "SEC-001",
+    "title": "Enable Password Encryption",
+    "description": "Ensure Cisco password encryption service is enabled to avoid plaintext storage.",
+    "pattern_required": "^service password-encryption",
+    "severity": "MEDIUM",
+    "remediation": "service password-encryption"
+  },
+  {
+    "id": "SEC-002",
+    "title": "Disable Unencrypted HTTP Server",
+    "description": "Unencrypted HTTP web management must be disabled in favor of HTTPS or SSH.",
+    "pattern_forbidden": "^ip http server",
+    "severity": "HIGH",
+    "remediation": "no ip http server"
+  },
+  {
+    "id": "SEC-003",
+    "title": "Enforce SSH Version 2",
+    "description": "Legacy SSH version 1 is vulnerable to MITM attacks and should be upgraded to v2.",
+    "pattern_required": "^ip ssh version 2",
+    "severity": "HIGH",
+    "remediation": "ip ssh version 2"
+  },
+  {
+    "id": "SEC-004",
+    "title": "Disable Telnet / Enforce SSH on VTY Lines",
+    "description": "VTY remote management lines must only accept SSH transport.",
+    "pattern_required": "transport input ssh",
+    "severity": "CRITICAL",
+    "remediation": "line vty 0 4\n transport input ssh"
+  },
+  {
+    "id": "SEC-005",
+    "title": "Restricted Access-Class on VTY",
+    "description": "Administrative access lines must be restricted to management subnets via ACL.",
+    "pattern_required": "access-class",
+    "severity": "HIGH",
+    "remediation": "line vty 0 4\n access-class MGMT_ACL in"
+  },
+  {
+    "id": "SEC-006",
+    "title": "Configure Login Banner (MOTD)",
+    "description": "A warning banner must be configured to inform unauthorized users of monitoring.",
+    "pattern_required": "^banner motd",
+    "severity": "LOW",
+    "remediation": "banner motd ^C Authorized Access Only! ^C"
+  }
+]
